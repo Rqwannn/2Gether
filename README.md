@@ -26,11 +26,11 @@
   <img src="Screnshot_Aplikasi/Role_Page.jpg" alt="Role Page" width="150" style="margin-bottom: 7px;"/>
   <img src="Screnshot_Aplikasi/Main_Page.jpg" alt="Main Page" width="150" style="margin-bottom: 7px;"/>
   <img src="Screnshot_Aplikasi/Backpack_Page.jpg" alt="Backpack Page" width="150" style="margin-bottom: 7px;"/>
-  <img src="Screnshot_Aplikasi/Leaderboard_Page.jpg" alt="Leaderboard Page" width="150" style="margin-bottom: 7px;"/>
   <img src="Screnshot_Aplikasi/Receipt_Page.jpg" alt="Receipt Page" width="150" style="margin-bottom: 7px;"/>
-  <img src="Screnshot_Aplikasi/Profile_Page.jpg" alt="Profile Page" width="150" style="margin-bottom: 7px;"/>
   <img src="Screnshot_Aplikasi/How_to_Create_Page.jpg" alt="How To Create Page" width="150" style="margin-bottom: 7px;"/>
   <img src="Screnshot_Aplikasi/Unggah_Page.jpg" alt="Unggah Page" width="150" style="margin-bottom: 7px;"/>
+  <img src="Screnshot_Aplikasi/Leaderboard_Page.jpg" alt="Leaderboard Page" width="150" style="margin-bottom: 7px;"/>
+  <img src="Screnshot_Aplikasi/Profile_Page.jpg" alt="Profile Page" width="150" style="margin-bottom: 7px;"/>
   <img src="Screnshot_Aplikasi/Scan_Page.jpg" alt="Scan Page" width="150" style="margin-bottom: 7px;"/>
   <img src="Screnshot_Aplikasi/Shot_Camera.jpg" alt="Shot Camera" width="150" style="margin-bottom: 7px;"/>
   <img src="Screnshot_Aplikasi/Load_Maps.jpg" alt="Load Maps Page" width="150" style="margin-bottom: 7px;"/>
