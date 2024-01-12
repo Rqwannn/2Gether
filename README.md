@@ -16,23 +16,23 @@
     I'm passionate about using analytical expertise and technical savvy to bridge business needs and data-driven solutions, solving real-world problems effectively.
     https://www.linkedin.com/in/achmadardanip/
 
-![Backpack Page](Screnshot_Aplikasi/Backpack_Page.jpg)
-![How To Create Page](Screnshot_Aplikasi/How_to_Create_Page.jpg)
-![Intro Screen 1 Page](Screnshot_Aplikasi/Intro_Screen_1.jpg)
-![Intro Screen 2 Page](Screnshot_Aplikasi/Intro_Screen_2.jpg)
-![Intro Screen 3 Page](Screnshot_Aplikasi/Intro_Screen_3.jpg)
-![Leaderboard Page](Screnshot_Aplikasi/Leaderboard_Page.jpg)
-![Load Maps Page](Screnshot_Aplikasi/Load_Maps.jpg)
-![Login Page](Screnshot_Aplikasi/Login_Page.jpg)
-![Main Page](Screnshot_Aplikasi/Main_Page.jpg)
-![Maps Page](Screnshot_Aplikasi/Maps_Page.jpg)
-![Profile Page](Screnshot_Aplikasi/Profile_Page.jpg)
-![QR Scan Page](Screnshot_Aplikasi/QR_Scan_Page.jpg)
-![Receipt Page](Screnshot_Aplikasi/Receipt_Page.jpg)
-![Receive Point Page](Screnshot_Aplikasi/Receive_Point.jpg)
-![Role Page](Screnshot_Aplikasi/Role_Page.jpg)
-![Scan Page](Screnshot_Aplikasi/Backpack_Page.jpg)
-![Select Account Login](Screnshot_Aplikasi/Select_Account_Login.jpg)
-![Shot Camera](Screnshot_Aplikasi/Shot_Camera.jpg)
-![Splash Screen Page](Screnshot_Aplikasi/Splash_Screen.jpg)
-![Unggah Page](Screnshot_Aplikasi/Unggah_Page.jpg)
+<img src="Screnshot_Aplikasi/Splash_Screen.jpg" alt="Splash Screen Page" width="100"/>
+<img src="Screnshot_Aplikasi/Intro_Screen_1.jpg" alt="Intro Screen 1 Page" width="100"/>
+<img src="Screnshot_Aplikasi/Intro_Screen_2.jpg" alt="Intro Screen 2 Page" width="100"/>
+<img src="Screnshot_Aplikasi/Intro_Screen_3.jpg" alt="Intro Screen 3 Page" width="100"/>
+<img src="Screnshot_Aplikasi/Login_Page.jpg" alt="Login Page" width="100"/>
+<img src="Screnshot_Aplikasi/Select_Account_Login.jpg" alt="Select Account Login" width="100"/>
+<img src="Screnshot_Aplikasi/Role_Page.jpg" alt="Role Page" width="100"/>
+<img src="Screnshot_Aplikasi/Main_Page.jpg" alt="Main Page" width="100"/>
+<img src="Screnshot_Aplikasi/Backpack_Page.jpg" alt="Backpack Page" width="100"/>
+<img src="Screnshot_Aplikasi/Leaderboard_Page.jpg" alt="Leaderboard Page" width="100"/>
+<img src="Screnshot_Aplikasi/Receipt_Page.jpg" alt="Receipt Page" width="100"/>
+<img src="Screnshot_Aplikasi/Profile_Page.jpg" alt="Profile Page" width="100"/>
+<img src="Screnshot_Aplikasi/How_to_Create_Page.jpg" alt="How To Create Page" width="100"/>
+<img src="Screnshot_Aplikasi/Unggah_Page.jpg" alt="Unggah Page" width="100"/>
+<img src="Screnshot_Aplikasi/Scan_Page.jpg" alt="Scan Page" width="100"/>
+<img src="Screnshot_Aplikasi/Shot_Camera.jpg" alt="Shot Camera" width="100"/>
+<img src="Screnshot_Aplikasi/Load_Maps.jpg" alt="Load Maps Page" width="100"/>
+<img src="Screnshot_Aplikasi/Maps_Page.jpg" alt="Maps Page" width="100"/>
+<img src="Screnshot_Aplikasi/QR_Scan_Page.jpg" alt="QR Scan Page" width="100"/>
+<img src="Screnshot_Aplikasi/Receive_Point.jpg" alt="Receive Point Page" width="100"/>
