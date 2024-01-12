@@ -481,7 +481,7 @@ class _ScanPageState extends State<ScanPage> {
                 );
               },
               child: Text(
-                'Ubah',
+                'Buang',
                 style: TextStyle(
                     color: Config().greenColor,
                 ),
