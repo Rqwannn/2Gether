@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "485462669003",
+    "project_id": "twogether-app-project",
+    "storage_bucket": "twogether-app-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485462669003:android:ba9efc3124190146fe4d4e",
+        "android_client_info": {
+          "package_name": "id.my.adamabd.twogether"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485462669003-aibo3t0o4c087ackhu74ppr8fbmku7t6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.my.adamabd.twogether",
+            "certificate_hash": "266425e5d1253861621556010912ace6bfda5c83"
+          }
+        },
+        {
+          "client_id": "485462669003-c0p0h0rlkk6g36mqpppk2ip44he7sl69.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.my.adamabd.twogether",
+            "certificate_hash": "8d155d7e82b607d55239bc45a57cddbd1a68b4ca"
+          }
+        },
+        {
+          "client_id": "485462669003-rd79ual0e0jeoe17scthmc6a47arkq1v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.my.adamabd.twogether",
+            "certificate_hash": "80c1af388bc78bad5ba49874c9a5a2dd2dd7714b"
+          }
+        },
+        {
+          "client_id": "485462669003-n8gf615m67u5mmdh36uq8mhjn8d90k37.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG1F3rM6FSF1RBje4EYimCsrfB5fpLylo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "485462669003-n8gf615m67u5mmdh36uq8mhjn8d90k37.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
