@@ -1,15 +1,7 @@
-import 'dart:io';
-
-import 'package:camera/camera.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tflite/tflite.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:twogether/config/config.dart';
 import 'package:twogether/feature/common/common.dart';
-import 'package:twogether/main.dart';
-
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class QrScanPage extends StatefulWidget {
   const QrScanPage({super.key});
@@ -19,103 +11,70 @@ class QrScanPage extends StatefulWidget {
 }
 
 class _QrScanPageState extends State<QrScanPage> {
-  bool isWorking = false;
-  bool flashMode = false;
-  bool cameraMode = false;
+  late QRViewController? controller;
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  CameraFacing currentCameraFacing = CameraFacing.back;
+  bool isFlashOn = false;
 
-  CameraImage? imgCamer;
-  CameraController? camController;
-  int selectedCameraIndex = 0;
+  // In order to get hot reload to work we need to pause the camera if the platform
+  // is android, or resume the camera if the platform is iOS.
+  @override
+  void reassemble() {
+    super.reassemble();
 
-  initCamera(CameraController newController) {
-    camController = newController;
+    // if (Platform.isAndroid) {
+    //   controller!.pauseCamera();
+    // } else if (Platform.isIOS) {
+    //   controller!.resumeCamera();
+    // }
 
-    camController!.initialize().then((value) {
-      if (!mounted) {
-        return;
-      }
-
-      setState(() {
-        camController!.startImageStream((image) => {
-              if (!isWorking)
-                {
-                  isWorking = true,
-                  imgCamer = image,
-                  runModelOnStreamFrames(),
-                }
-            });
-      });
-    });
-  }
-
-  cekFlashMode() {
-    if (flashMode) {
-      camController!.setFlashMode(FlashMode.torch);
-    } else {
-      camController!.setFlashMode(FlashMode.off);
-    }
-  }
-
-  setFlashMode() {
-    setState(() {
-      flashMode = !flashMode;
-    });
-  }
-
-  setCameraMode() async {
-    if (cameras!.length > 1) {
-      selectedCameraIndex = (selectedCameraIndex + 1) % cameras!.length;
-      await changePositionCameraController(cameras![selectedCameraIndex]);
-    }
-  }
-
-  Future<void> changePositionCameraController(
-      CameraDescription cameraDescription) async {
-    if (camController != null) {
-      await camController!.dispose();
-    }
-
-    camController = CameraController(
-      cameraDescription,
-      ResolutionPreset.medium,
-    );
-
-    try {
-      initCamera(camController!);
-    } catch (e) {
-      print('Error inisialisasi kamera: $e');
-    }
-
-    if (mounted) {
-      setState(() {});
-    }
-  }
-
-  runModelOnStreamFrames() async {
-    if (imgCamer != null) {
-      
-
-      isWorking = false;
-    }
   }
 
   @override
   void initState() {
     super.initState();
 
-    initCamera(CameraController(cameras![0], ResolutionPreset.medium));
-
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushNamed(context, PagePath.getPoint);
     });
     
   }
 
+  void onQRViewCreated(QRViewController controller) {
+    setState(() {
+      this.controller = controller;
+    });
+    controller.scannedDataStream.listen((scanData) {
+      String? qrCodeData = scanData.code;
+
+      if(qrCodeData != null){
+        controller!.pauseCamera();
+        print("Hasil scan: $qrCodeData");
+      }
+
+    });
+  }
+
+  void toggleFlash() {
+    setState(() {
+      isFlashOn = !isFlashOn;
+      controller!.toggleFlash();
+    });
+  }
+
+  void toggleCamera() {
+    setState(() {
+      currentCameraFacing = currentCameraFacing == CameraFacing.back
+          ? CameraFacing.front
+          : CameraFacing.back;
+      controller!.flipCamera();
+    });
+  }
+
   @override
   void dispose() async {
     super.dispose();
-    await Tflite.close();
-    camController!.dispose();
+    controller?.dispose();
   }
 
   @override
@@ -165,19 +124,18 @@ class _QrScanPageState extends State<QrScanPage> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Center(
-                      child: imgCamer == null
-                          ? const Text(
-                              "Kamera Tidak Tersedia",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
-                          : AspectRatio(
-                              aspectRatio: 9 / 13,
-                              child: CameraPreview(camController!),
+                      child: QRView(
+                            key: qrKey,
+                            cameraFacing: currentCameraFacing,
+                            onQRViewCreated: onQRViewCreated,
+                            overlay: QrScannerOverlayShape(
+                              borderColor: Colors.transparent,
+                              borderRadius: 0,
+                              borderLength: 0,
+                              borderWidth: 0,
+                              cutOutSize: 450,
                             ),
+                          )
                     ),
                   ),
                 ),
@@ -202,13 +160,13 @@ class _QrScanPageState extends State<QrScanPage> {
                       
                       InkWell(
                         onTap: () {
-                          setFlashMode();
+                          toggleFlash();
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 title: const Text("Flash Mode"),
-                                content: flashMode
+                                content: isFlashOn
                                     ? const Text("On")
                                     : const Text("Off"),
                               );
@@ -220,7 +178,7 @@ class _QrScanPageState extends State<QrScanPage> {
                       ),
                       InkWell(
                         onTap: () async {
-                          setCameraMode();
+                          toggleCamera();
                         },
                         child: Image.asset(Config().cameraIcon,
                             width: 50, height: 50),

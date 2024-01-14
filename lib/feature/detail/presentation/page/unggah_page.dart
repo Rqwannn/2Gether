@@ -43,6 +43,7 @@ class _UnggahPageState extends State<UnggahPage> {
                 fontWeight: FontWeight.bold,
                 color: Config().greenColor,
               ),
+              textAlign: TextAlign.center,
             ),
           ),
 
