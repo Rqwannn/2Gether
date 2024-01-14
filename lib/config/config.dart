@@ -26,6 +26,7 @@ class Config {
   final Color startGradientColorIcon = const Color(0xFF1D5B56);
   final Color endGradientColorIcon = const Color(0xFF7EDCBE);
 
+  final Color leaderboardActiveColor = const Color(0xFFD2F2E4);
   final Color gold = const Color(0xFFFFAA04);
   final Color silver = const Color(0xFF9E9E9E);
   final Color bronze = const Color(0xFFFF6E04);
