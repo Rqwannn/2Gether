@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twogether/config/config.dart';
+import 'package:twogether/feature/common/common.dart';
 
 class GetPointPage extends StatefulWidget {
   const GetPointPage({super.key});
@@ -9,6 +10,18 @@ class GetPointPage extends StatefulWidget {
 }
 
 class _GetPointPageState extends State<GetPointPage> {
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.pushNamed(
+        context, 
+        PagePath.home,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Config {
   final String appName = '2Gether';
@@ -78,6 +79,10 @@ class Config {
   // Google Maps API
 
   static const String googleMapsKey = "AIzaSyC6WZ2ezYNvaAs48CV1auf-Mc2QzQdeZRQ";
+
+  static String getDirection(LatLng userLocation, LatLng placeLocation) {
+    return 'https://maps.googleapis.com/maps/api/directions/json?origin=${userLocation.latitude},${userLocation.longitude}&destination=${placeLocation.latitude},${placeLocation.longitude}&key=$googleMapsKey';
+  }
 
   static String getNearbyPlacesUrl(double latitude, double longitude, int radius) {
     return 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$latitude,$longitude&radius=$radius&type=tourist_attraction&key=$googleMapsKey';
