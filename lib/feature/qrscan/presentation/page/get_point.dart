@@ -14,7 +14,7 @@ class _GetPointPageState extends State<GetPointPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushNamed(
         context, 
         PagePath.home,

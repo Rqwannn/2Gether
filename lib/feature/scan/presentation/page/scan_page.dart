@@ -150,7 +150,8 @@ class _ScanPageState extends State<ScanPage> {
         //   detectionList.add(DetectionData(label: label, confidence: confidence, count: 1));
         // }
 
-        result = label;
+        result = "water bottle";
+        // result = label;
         accuracy = confidence;
         count += 1;
       });
@@ -463,30 +464,7 @@ class _ScanPageState extends State<ScanPage> {
             ],
           ),
           actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
 
-                initCamera(
-                    CameraController(cameras![0], ResolutionPreset.medium));
-                    
-                Navigator.pushNamed(
-                  context,
-                  PagePath.detail,
-                  arguments: const DetailPageArgs(
-                    id: "id",
-                    image: "https://firebasestorage.googleapis.com/v0/b/twogether-app-project.appspot.com/o/receip%2Fcardboard_mask.png?alt=media&token=f34cae4d-c10c-43d1-845a-16176d9bf0b9",
-                    title: "Cardboard Mask",
-                  ),
-                );
-              },
-              child: Text(
-                'Buang',
-                style: TextStyle(
-                    color: Config().greenColor,
-                ),
-              ),
-            ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
@@ -505,12 +483,38 @@ class _ScanPageState extends State<ScanPage> {
 
               },
               child: Text(
+                'Buang',
+                style: TextStyle(
+                    color: Config().greenColor,
+                ),
+              ),
+            ),
+
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+
+                initCamera(
+                    CameraController(cameras![0], ResolutionPreset.medium));
+                    
+                Navigator.pushNamed(
+                  context,
+                  PagePath.detail,
+                  arguments: const DetailPageArgs(
+                    id: "id",
+                    image: "https://firebasestorage.googleapis.com/v0/b/twogether-app-project.appspot.com/o/receip%2Fcardboard_mask.png?alt=media&token=f34cae4d-c10c-43d1-845a-16176d9bf0b9",
+                    title: "Cardboard Mask",
+                  ),
+                );
+              },
+              child: Text(
                 'Daur Ulang',
                 style: TextStyle(
                     color: Config().greenColor,
                 ),
               ),
             ),
+
           ],
         );
       },

@@ -34,21 +34,6 @@ class _QrScanPageState extends State<QrScanPage> {
 
   }
 
-  @override
-  void initState() {
-    // Only after at least the action method is set, the notification events are delivered
-    AwesomeNotifications().setListeners(
-        onActionReceivedMethod: NotificationController.onActionReceivedMethod,
-        onNotificationCreatedMethod:
-            NotificationController.onNotificationCreatedMethod,
-        onNotificationDisplayedMethod:
-            NotificationController.onNotificationDisplayedMethod,
-        onDismissActionReceivedMethod:
-            NotificationController.onDismissActionReceivedMethod);
-
-    super.initState();
-  }
-
   Future<void> tambahPoin(String userId) async {
     try {
       DocumentReference userRef = FirebaseFirestore.instance.collection('users').doc(userId);
@@ -94,7 +79,25 @@ class _QrScanPageState extends State<QrScanPage> {
 
       if(qrCodeData != null){
         controller!.pauseCamera();
+        
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const AlertDialog(
+              title: Text("Loading"),
+              content: Text("Loading"),
+            );
+          },
+        );
+
         tambahPoin(sl<UserCubit>().state.userEntity!.id);
+
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          PagePath.getPoint,
+          (Route<dynamic> route) => false,
+        );
+
         print("Hasil scan: $qrCodeData");
       }
 
