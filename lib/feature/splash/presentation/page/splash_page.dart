@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:twogether/config/config.dart';
@@ -33,6 +34,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+
   @override
   void initState() {
     super.initState();
@@ -42,6 +44,8 @@ class _SplashPageState extends State<SplashPage> {
         AwesomeNotifications().requestPermissionToSendNotifications();
       }
     });
+
+    checkHostExistence();
 
     Future.delayed(
       const Duration(seconds: 3),
@@ -54,6 +58,28 @@ class _SplashPageState extends State<SplashPage> {
         }
       },
     );
+  }
+
+  Future<void> checkHostExistence() async {
+    bool isHostExisting = await isHostExist(sl<UserCubit>().state.userEntity!.id);
+
+    if (isHostExisting) {
+      Navigator.pushReplacementNamed(context, PagePath.host);
+    }
+  }
+
+  Future<bool> isHostExist(String idAccount) async {
+    try {
+      CollectionReference hostsCollection = FirebaseFirestore.instance.collection('host');
+      QuerySnapshot querySnapshot = await hostsCollection.where('id_account', isEqualTo: idAccount).get();
+      print(idAccount);
+
+      return querySnapshot.docs.isNotEmpty;
+    } catch (e) {
+      // Handle kesalahan atau kembalikan false jika terjadi kesalahan
+      print("Error checking host existence: $e");
+      return false;
+    }
   }
 
   @override

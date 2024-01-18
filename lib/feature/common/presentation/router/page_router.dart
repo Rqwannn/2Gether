@@ -70,9 +70,17 @@ class PageRouter {
 
       case PagePath.generateQR:
         {
+          final args = settings.arguments as Map<String, dynamic>?;
+
+          final position = args!['position'] as LatLng;
+          final address = args['address'] as String;
+          
           return _buildRouter(
             settings: settings,
-            builder: (args) => const GenerateQRPage(),
+            builder: (args) => GenerateQRPage(
+              position: position,
+              address: address,
+            ),
           );
         }
 

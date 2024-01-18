@@ -4,6 +4,7 @@ import 'package:twogether/config/config.dart';
 import 'package:twogether/feature/auth/auth.dart';
 import 'package:twogether/feature/host/presentation/screen/profile.dart';
 import 'package:twogether/feature/host/presentation/screen/tipe_sampah.dart';
+import 'package:twogether/locator.dart';
 
 class HostPage extends StatefulWidget {
   const HostPage({super.key});
@@ -14,6 +15,11 @@ class HostPage extends StatefulWidget {
 
 class _HostPageState extends State<HostPage> {
   int index = 0;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

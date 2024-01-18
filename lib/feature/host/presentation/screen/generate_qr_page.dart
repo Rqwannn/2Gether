@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:twogether/config/config.dart';
 
 class GenerateQRPage extends StatefulWidget {
-  const GenerateQRPage({super.key});
+  const GenerateQRPage({
+    super.key,
+    required this.address,
+    required this.position 
+  });
+
+  final String address;
+  final LatLng position;
 
   @override
   State<GenerateQRPage> createState() => _GenerateQRPageState();
 }
 
 class _GenerateQRPageState extends State<GenerateQRPage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(widget.address);
+    print(widget.position);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
