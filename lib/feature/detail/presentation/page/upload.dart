@@ -1,5 +1,10 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:twogether/config/config.dart';
+import 'package:twogether/feature/common/common.dart';
+import 'package:twogether/locator.dart';
+import 'package:twogether/service/notification_controller.dart';
 
 class UploadPage extends StatefulWidget {
   const UploadPage({super.key});
@@ -10,6 +15,44 @@ class UploadPage extends StatefulWidget {
 
 class _UploadPageState extends State<UploadPage> {
   bool isCardVisible = false;
+
+  Future<void> tambahPoin(String userId) async {
+    try {
+      DocumentReference userRef = FirebaseFirestore.instance.collection('users').doc(userId);
+      DocumentSnapshot userSnapshot = await userRef.get();
+
+      // Mengambil nilai poin saat ini
+      int poinSaatIni = userSnapshot['poin'] ?? 0;
+      String username = userSnapshot['username'];
+
+      int poinBaru = poinSaatIni + 10;
+
+      await userRef.update({'poin': poinBaru});
+
+      AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: 10,
+          channelKey: 'basic_channel',
+          actionType: ActionType.Default,
+          title: 'Upload Berhasil!',
+          body: 'Berhasil menambahkan 10 poin ke pengguna dengan Username: $username',
+        ),
+      );
+
+      Navigator.pushNamed(context, PagePath.getPoint);
+
+    } catch (e) {
+      AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: 10,
+          channelKey: 'basic_channel',
+          actionType: ActionType.Default,
+          title: 'Upload Gagal!',
+          body: 'Terdapat Kesalah Pada Sistem Mohon Untuk Menghubungi Customer Service',
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,20 +130,27 @@ class _UploadPageState extends State<UploadPage> {
                         );
                       }
 
-                      return Container(
-                        margin: EdgeInsets.all(Config().distancePerText),
-                        width: 88,
-                        height: 88,
-                        decoration: BoxDecoration(
-                          color: Config().semiGrayColor,
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Center(
-                          child: Icon(
-                            Icons.add_circle,
-                            size: 25,
-                            color: Config().whiteColor,
-                          )
+                      return InkWell(
+                        onTap: () {
+                          setState(() {
+                            isCardVisible = !isCardVisible;
+                          });
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(Config().distancePerText),
+                          width: 88,
+                          height: 88,
+                          decoration: BoxDecoration(
+                            color: Config().semiGrayColor,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.add_circle,
+                              size: 25,
+                              color: Config().whiteColor,
+                            )
+                          ),
                         ),
                       );
                     }),
@@ -114,9 +164,7 @@ class _UploadPageState extends State<UploadPage> {
                 alignment: Alignment.center,
                 child: GestureDetector(
                   onTap: () {
-                    setState(() {
-                      isCardVisible = !isCardVisible;
-                    });
+                    tambahPoin(sl<UserCubit>().state.userEntity!.id);
                   },
                   child: Container(
                     decoration: BoxDecoration(

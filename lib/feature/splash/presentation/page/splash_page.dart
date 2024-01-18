@@ -75,7 +75,6 @@ class _SplashPageState extends State<SplashPage> {
 
       return querySnapshot.docs.isNotEmpty;
     } catch (e) {
-      // Handle kesalahan atau kembalikan false jika terjadi kesalahan
       print("Error checking host existence: $e");
       return false;
     }

@@ -29,8 +29,7 @@ Future<void> main() async {
   );
 
     AwesomeNotifications().initialize(
-      // set the icon to null if you want to use the default app icon
-      Config().appLogo,
+      null,
       [
         NotificationChannel(
             channelGroupKey: 'basic_channel_group',
@@ -40,7 +39,6 @@ Future<void> main() async {
             defaultColor: Color(0xFF9D50DD),
             ledColor: Colors.white)
       ],
-      // Channel groups are only visual and are not required
       channelGroups: [
         NotificationChannelGroup(
             channelGroupKey: 'basic_channel_group',
@@ -64,7 +62,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    // Only after at least the action method is set, the notification events are delivered
     AwesomeNotifications().setListeners(
         onActionReceivedMethod: NotificationController.onActionReceivedMethod,
         onNotificationCreatedMethod:
