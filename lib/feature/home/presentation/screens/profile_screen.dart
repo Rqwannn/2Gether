@@ -62,6 +62,96 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: Config().greenColor,
                               ),
                             ),
+
+                            SizedBox(height: Config().distancePerValue),
+
+                            Container(
+                              padding: EdgeInsets.all(Config().distancePerValue),
+                              decoration: BoxDecoration(
+                                color:  Config().GreenDarkColor,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey[300]!,
+                                    blurRadius: 10,
+                                    spreadRadius: 2,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  
+                                  Text(
+                                    "QR Anda",
+                                    style: TextStyle(
+                                      fontSize: Config().smallTextSize,
+                                      color: Colors.black
+                                    ),
+                                  ),
+                                  
+                                  Text(
+                                    "3",
+                                    style: TextStyle(
+                                      fontSize: Config().smallTextSize,
+                                      color: Colors.black
+                                    ),
+                                  ),
+
+
+                                ],
+                              ),
+                            ),
+
+                            SizedBox(height: Config().distancePerValue),
+
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: Config().distancePerValue + 30),
+                              child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Config().startGradientColorCard,
+                                    Config().endGradientColorCard
+                                  ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.transparent,
+                                    disabledForegroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent,
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ).copyWith(
+                                    fixedSize: MaterialStateProperty.all(
+                                      const Size.fromHeight(50),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'Redeem Point',
+                                      style: TextStyle(
+                                        color: Config().greenColor,
+                                        fontSize: Config().smallToMediumTextSize,
+                                      ),
+                                    ),
+                                  )
+                                ),
+                              ),
+                            ),
+
                           ],
                         ),
                       )),

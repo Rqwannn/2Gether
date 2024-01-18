@@ -12,6 +12,7 @@ class Config {
   final Color greenColor = const Color(0xFF1D5B56);
   final Color semiGreenColor = const Color(0xFF0C8C79);
   final Color youngGreenColor = const Color(0xFF65C074);
+  final Color GreenDarkColor = const Color(0xFFBCE7C6);
   final Color blueOceanColor = const Color(0xFFE9F9EE);
   final Color orangeColor = const Color(0xFFf88753);
 
@@ -66,6 +67,7 @@ class Config {
   final String intro3 = 'assets/core/splash_3.png';
   final String role = 'assets/core/role_1.png';
   final String pilihLokasiImg = 'assets/core/pilih_lokasi.png';
+  final String qrCodeIcon = 'assets/core/qr_code.png';
 
   // Size
 

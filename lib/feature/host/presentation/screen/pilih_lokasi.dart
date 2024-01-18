@@ -41,9 +41,10 @@ class _PilihLokasiPageState extends State<PilihLokasiPage> {
         location!.longitude,
       );
 
+
       if (placemarks.isNotEmpty) {
         Placemark placemark = placemarks.first;
-        return placemark.thoroughfare ?? placemark.name;
+        return placemark.thoroughfare == "" ? placemark.name : placemark.thoroughfare;
       } else {
         return null;
       }
@@ -134,10 +135,9 @@ class _PilihLokasiPageState extends State<PilihLokasiPage> {
                       ),
                       onTap: () async {
                         PositionWithAddress? position = await getLocationWithAddress();
-                        
                         if (position != null) {
-                          String? address = await getAddressFromLocation(position.position);
-                          
+                          String? address = await getAddressFromLocation(position!.position);
+
                           if (address != null) {
                             geocoding = position.position;
                             lokasiController.text = address;
