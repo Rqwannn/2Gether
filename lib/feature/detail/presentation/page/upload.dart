@@ -1,37 +1,15 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:twogether/config/config.dart';
-import 'package:twogether/feature/common/common.dart';
 
-class UnggahPage extends StatefulWidget {
-  const UnggahPage({super.key});
+class UploadPage extends StatefulWidget {
+  const UploadPage({super.key});
 
   @override
-  State<UnggahPage> createState() => _UnggahPageState();
+  State<UploadPage> createState() => _UploadPageState();
 }
 
-class _UnggahPageState extends State<UnggahPage> {
+class _UploadPageState extends State<UploadPage> {
   bool isCardVisible = false;
-
-  Future<void> openGallery() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-
-    if (image != null) {
-      print("Path: ${image.path}");
-      Navigator.pushNamed(context, PagePath.upload);
-    }
-  }
-
-  Future<void> openFileManager() async {
-    final result = await FilePicker.platform.pickFiles();
-
-    if (result != null) {
-      print("Path: ${result.files.single.path}");
-      Navigator.pushNamed(context, PagePath.upload);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +35,7 @@ class _UnggahPageState extends State<UnggahPage> {
           Column(
             children: <Widget>[
 
-              SizedBox(height: Config().distancePerValue + 50),
+              SizedBox(height: Config().distancePerValue + 30),
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50),
@@ -72,15 +50,65 @@ class _UnggahPageState extends State<UnggahPage> {
                 ),
               ),
 
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: Config().distancePerValue),
-                child: Image.asset(
-                  Config().unggahPageImg,
-                  width: MediaQuery.of(context).size.width,
+              SizedBox(height: Config().distancePerValue + 10 ),
+
+              SingleChildScrollView(
+                child: Container(
+                  height: 250,
+                  // padding: EdgeInsets.all(16.0),
+                  child: Wrap(
+                    spacing: 0,
+                    runSpacing: 0,
+                    children: List.generate(6, (index) {
+                      
+                      if(index != 0){
+                        return Stack(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.all(Config().distancePerText),
+                              width: 88,
+                              height: 88,
+                              decoration: BoxDecoration(
+                                color: Config().semiGrayColor,
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+
+                            Positioned(
+                              top: 4,
+                              right: 4,
+                              child: Icon(
+                                Icons.add_circle,
+                                size: 25,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+
+                      return Container(
+                        margin: EdgeInsets.all(Config().distancePerText),
+                        width: 88,
+                        height: 88,
+                        decoration: BoxDecoration(
+                          color: Config().semiGrayColor,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.add_circle,
+                            size: 25,
+                            color: Config().whiteColor,
+                          )
+                        ),
+                      );
+                    }),
+                  ),
                 ),
               ),
 
-              SizedBox(height: Config().distancePerValue),
+              SizedBox(height: Config().distancePerValue + 30),
 
               Align(
                 alignment: Alignment.center,
@@ -97,7 +125,7 @@ class _UnggahPageState extends State<UnggahPage> {
                       ),
                     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                     child: Text(
-                      "Unggah",
+                      "Upload",
                       style: TextStyle(
                         fontSize: Config().smallTextSize,
                         fontWeight: FontWeight.w500,
@@ -129,18 +157,8 @@ class _UnggahPageState extends State<UnggahPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      InkWell(
-                        onTap: () {
-                          openGallery();
-                        },
-                        child: Icon(Icons.photo, size: 50, color: Config().greenColor),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          openFileManager();
-                        },
-                        child: Icon(Icons.insert_drive_file, size: 50, color: Config().greenColor),
-                      ),
+                      Icon(Icons.photo, size: 50, color: Config().greenColor),
+                      Icon(Icons.insert_drive_file, size: 50, color: Config().greenColor),
                     ],
                   ),
                 ),
@@ -148,7 +166,7 @@ class _UnggahPageState extends State<UnggahPage> {
             ),
           ),
         ],
-      )
+      ),
     );
   }
 }

@@ -8,6 +8,7 @@ class Config {
 
   final Color whiteColor = const Color(0xFFFFFFFF);
   final Color grayColor = const Color(0xFF787878);
+  final Color semiGrayColor = const Color(0xFFD9D9D9);
   final Color lightGrayColor = Color(0xFFE8F2EF);
   final Color greenColor = const Color(0xFF1D5B56);
   final Color semiGreenColor = const Color(0xFF0C8C79);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:twogether/config/config.dart';
 import 'package:twogether/feature/detail/presentation/page/unggah_page.dart';
+import 'package:twogether/feature/detail/presentation/page/upload.dart';
 import 'package:twogether/feature/feature.dart';
 import 'package:twogether/feature/gmaps/presentation/page/load_maps.dart';
 import 'package:twogether/feature/gmaps/presentation/page/maps.dart';
@@ -183,6 +184,14 @@ class PageRouter {
           return _buildRouter(
             settings: settings,
             builder: (args) => const UnggahPage(),
+          );
+        }
+
+      case PagePath.upload:
+        {
+          return _buildRouter(
+            settings: settings,
+            builder: (args) => const UploadPage(),
           );
         }
 
