@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:twogether/config/config.dart';
+import 'package:twogether/feature/auth/auth.dart';
 import 'package:twogether/feature/host/presentation/screen/profile.dart';
 import 'package:twogether/feature/host/presentation/screen/tipe_sampah.dart';
 
@@ -33,6 +35,10 @@ class _HostPageState extends State<HostPage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: index,
         onTap: (index) {
+          if (index == 2) {
+            context.read<GoogleAuthCubit>().googleSignOut();
+          }
+
           pageController.animateToPage(
             index,
             duration: const Duration(milliseconds: 500),
@@ -49,6 +55,10 @@ class _HostPageState extends State<HostPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: "Profile",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.logout),
+            label: "Log Out",
           ),
         ],
       ),

@@ -1,6 +1,9 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:twogether/config/config.dart';
 import 'package:twogether/feature/common/common.dart';
+import 'package:twogether/locator.dart';
 
 class FormInstansiPage extends StatefulWidget {
   const FormInstansiPage({super.key});
@@ -10,6 +13,58 @@ class FormInstansiPage extends StatefulWidget {
 }
 
 class _FormInstansiPageState extends State<FormInstansiPage> {
+  TextEditingController namaLengkapController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController namaInstansiController = TextEditingController();
+
+  Future<void> saveToFirestore() async {
+    try {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return const AlertDialog(
+            title: Text("Loading"),
+            content: Text("Loading"),
+          );
+        },
+      );
+
+      CollectionReference selectionHostCollection = FirebaseFirestore.instance.collection('host');
+
+      String namaInstansi = namaInstansiController.text;
+
+      await selectionHostCollection.add({
+        'kontak_person': namaLengkapController.text,
+        'email': emailController.text,
+        'nama_instansi': namaInstansi,
+        'id_account': sl<UserCubit>().state.userEntity!.id,
+      });
+
+
+      AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: 10,
+          channelKey: 'basic_channel',
+          actionType: ActionType.Default,
+          title: 'Data berhasil disimpan!',
+          body: 'Akun anda berhasil di simpan dengan Nama Instansi: $namaInstansi',
+        ),
+      );
+
+    } catch (e) {
+       AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: 10,
+          channelKey: 'basic_channel',
+          actionType: ActionType.Default,
+          title: 'Data gagal disimpan!',
+          body: 'Tolong hubungin customer service kami jika terjadi masalah ini',
+        ),
+      );
+
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,21 +90,8 @@ class _FormInstansiPageState extends State<FormInstansiPage> {
 
             SizedBox(height: Config().distancePerValue + 10),
 
-            Container(
-              child: Text(
-                "Nama Lengkap",
-                style: TextStyle(
-                  fontSize: Config().smallToMediumTextSize,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                ),
-                textAlign: TextAlign.start,
-              ),
-            ),
-
-            const SizedBox(height: 5),
-
             TextField(
+              controller: namaLengkapController,
               decoration: InputDecoration(
                 labelText: 'Nama Lengkap',
                 prefixIcon: const Icon(Icons.person),
@@ -69,21 +111,9 @@ class _FormInstansiPageState extends State<FormInstansiPage> {
 
              SizedBox(height: Config().distancePerValue + 10),
 
-             Container(
-              child: Text(
-                "Email",
-                style: TextStyle(
-                  fontSize: Config().smallToMediumTextSize,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                ),
-                textAlign: TextAlign.start,
-              ),
-            ),
-
-            const SizedBox(height: 5),
 
              TextField(
+              controller: emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
                 prefixIcon: const Icon(Icons.person),
@@ -103,21 +133,8 @@ class _FormInstansiPageState extends State<FormInstansiPage> {
 
             SizedBox(height: Config().distancePerValue + 10),
 
-            Container(
-              child: Text(
-                "Nama Instansi",
-                style: TextStyle(
-                  fontSize: Config().smallToMediumTextSize,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                ),
-                textAlign: TextAlign.start,
-              ),
-            ),
-
-            const SizedBox(height: 5),
-
             TextField(
+              controller: namaInstansiController,
               decoration: InputDecoration(
                 labelText: 'Nama Instansi',
                 prefixIcon: const Icon(Icons.person),
@@ -139,7 +156,14 @@ class _FormInstansiPageState extends State<FormInstansiPage> {
 
             Center(
               child: GestureDetector(
-                onTap: () => Navigator.pushNamed(context, PagePath.host),
+                onTap: () {
+                  saveToFirestore();
+
+                  Navigator.pushNamed(
+                    context,
+                    PagePath.host,
+                  );
+                },
                 child: Container(
                   decoration: BoxDecoration(
                       color: Config().greenColor,
