@@ -72,7 +72,6 @@ class _SplashPageState extends State<SplashPage> {
     try {
       CollectionReference hostsCollection = FirebaseFirestore.instance.collection('host');
       QuerySnapshot querySnapshot = await hostsCollection.where('id_account', isEqualTo: idAccount).get();
-      print(idAccount);
 
       return querySnapshot.docs.isNotEmpty;
     } catch (e) {

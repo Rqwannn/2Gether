@@ -32,6 +32,10 @@ class PagePath {
   static const detail = '/detail';
   static const unggah = '/unggah';
 
+  //* Redeem Point
+  static const redeem = '/redem';
+  static const detailRedeem = '/detail_redem';
+
   //* Auth
   static const login = '/login';
   static const register = '/register';

@@ -10,6 +10,8 @@ import 'package:twogether/feature/host/presentation/page/host_page.dart';
 import 'package:twogether/feature/host/presentation/screen/form_instansi.dart';
 import 'package:twogether/feature/host/presentation/screen/generate_qr_page.dart';
 import 'package:twogether/feature/host/presentation/screen/pilih_lokasi.dart';
+import 'package:twogether/feature/redeem/presentation/screen/detail_redeem.dart';
+import 'package:twogether/feature/redeem/presentation/page/redem_point.dart';
 import 'package:twogether/feature/role/presentation/page/role.dart';
 import 'package:twogether/feature/splash_info/presentation/presentation.dart';
 import 'package:twogether/feature/qrscan/presentation/page/get_point.dart';
@@ -20,6 +22,7 @@ class PageRouter {
     RouteSettings settings,
   ) {
     switch (settings.name) {
+
       //* Splash
       case PagePath.splash:
         {
@@ -81,6 +84,23 @@ class PageRouter {
               position: position,
               address: address,
             ),
+          );
+        }
+
+      //* Redeem Point
+      case PagePath.redeem:
+        {
+          return _buildRouter(
+            settings: settings,
+            builder: (args) => const RedemPage(),
+          );
+        }
+      
+      case PagePath.detailRedeem:
+        {
+          return _buildRouter(
+            settings: settings,
+            builder: (args) => const DetailRedeem(),
           );
         }
 

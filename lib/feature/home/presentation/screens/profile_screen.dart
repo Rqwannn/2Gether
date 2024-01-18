@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:twogether/config/config.dart';
 import 'package:twogether/feature/feature.dart';
+import 'package:twogether/locator.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -11,6 +13,38 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
+  int poin = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    getPoinByUserId(sl<UserCubit>().state.userEntity!.id);
+  }
+  
+  Future<int?> getPoinByUserId(String userId) async {
+    try {
+      QuerySnapshot userSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('id', isEqualTo: userId)
+          .get();
+
+      print(userSnapshot.docs.first.get('poin'));
+
+      if (userSnapshot.docs.isNotEmpty) {
+        setState(() {
+          poin = userSnapshot.docs.first.get('poin') as int;
+        });
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('Error retrieving poin: $e');
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -85,7 +119,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 children: [
                                   
                                   Text(
-                                    "QR Anda",
+                                    "Point Kamu",
                                     style: TextStyle(
                                       fontSize: Config().smallTextSize,
                                       color: Colors.black
@@ -93,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                   
                                   Text(
-                                    "3",
+                                    poin.toString(),
                                     style: TextStyle(
                                       fontSize: Config().smallTextSize,
                                       color: Colors.black
@@ -123,7 +157,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               child: ElevatedButton(
                                   onPressed: () {
-                                    
+                                    Navigator.pushNamed(context, PagePath.redeem);
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.transparent,

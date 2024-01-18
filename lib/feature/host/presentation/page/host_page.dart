@@ -17,11 +17,6 @@ class _HostPageState extends State<HostPage> {
   int index = 0;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     PageController pageController = PageController();
 

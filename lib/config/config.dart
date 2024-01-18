@@ -50,6 +50,10 @@ class Config {
   final String testingProduk = 'assets/other/testing_produk.png';
 
   final String scanRec1 = 'assets/other/scan_rec_1.png';
+  final String coupon1 = 'assets/other/coupon_1.png';
+  final String coupon2 = 'assets/other/coupon_2.png';
+  final String coupon3 = 'assets/other/coupon_3.png';
+  final String detailCoupon = 'assets/other/coupon.png';
 
   final String defaultUser = 'assets/resource/default_user.png';
   final String googleIcon = 'assets/resource/google_icon.png';
