@@ -94,6 +94,13 @@ class _RolePageState extends State<RolePage> {
                 SizedBox(height: Config().distancePerValue),
 
                 GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        PagePath.formInstansi,
+                        (Route<dynamic> route) => false,
+                      );
+                  },
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: Config().distancePerValue + 50),
                     child: Card(

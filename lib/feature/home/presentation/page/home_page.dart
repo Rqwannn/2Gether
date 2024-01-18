@@ -8,10 +8,7 @@ import 'package:twogether/feature/home/presentation/screens/leaderboard.dart';
 class HomePage extends StatefulWidget {
   const HomePage({
     super.key,
-    this.index = 0
   });
-
-  final int index;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -21,18 +18,12 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   int index = 0;
 
   @override
-  void initState() {
-    super.initState();
-    index = widget.index;
-  }
-
-  @override
   Widget build(BuildContext context) {
     PageController pageController = PageController();
 
     return Scaffold(
       body: SafeArea(
-        top: index != 3,
+        // top: index != 3,
         child: PageView(
           controller: pageController,
           onPageChanged: (i) => setState(() {

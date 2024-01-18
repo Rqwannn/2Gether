@@ -150,8 +150,8 @@ class _ScanPageState extends State<ScanPage> {
         //   detectionList.add(DetectionData(label: label, confidence: confidence, count: 1));
         // }
 
-        result = "water bottle";
-        // result = label;
+        // result = "water bottle";
+        result = label;
         accuracy = confidence;
         count += 1;
       });

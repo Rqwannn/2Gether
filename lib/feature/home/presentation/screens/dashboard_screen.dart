@@ -84,7 +84,7 @@ class DashboardScreen extends StatelessWidget {
                           width: 25,
                         )),
                     Text(
-                      'SCAN NOW',
+                      'Ambil Foto',
                       style: TextStyle(
                         fontSize: Config().mediumTextSize,
                         fontWeight: FontWeight.bold,

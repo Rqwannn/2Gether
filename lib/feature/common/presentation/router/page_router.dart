@@ -6,6 +6,10 @@ import 'package:twogether/feature/feature.dart';
 import 'package:twogether/feature/gmaps/presentation/page/load_maps.dart';
 import 'package:twogether/feature/gmaps/presentation/page/maps.dart';
 import 'package:twogether/feature/home/presentation/screens/leaderboard.dart';
+import 'package:twogether/feature/host/presentation/page/host_page.dart';
+import 'package:twogether/feature/host/presentation/screen/form_instansi.dart';
+import 'package:twogether/feature/host/presentation/screen/generate_qr_page.dart';
+import 'package:twogether/feature/host/presentation/screen/pilih_lokasi.dart';
 import 'package:twogether/feature/role/presentation/page/role.dart';
 import 'package:twogether/feature/splash_info/presentation/presentation.dart';
 import 'package:twogether/feature/qrscan/presentation/page/get_point.dart';
@@ -36,6 +40,39 @@ class PageRouter {
           return _buildRouter(
             settings: settings,
             builder: (args) => const SplashInfoPage(),
+          );
+        }
+
+      //* Host
+      case PagePath.host:
+        {
+          return _buildRouter(
+            settings: settings,
+            builder: (args) => const HostPage(),
+          );
+        }
+
+      case PagePath.formInstansi:
+        {
+          return _buildRouter(
+            settings: settings,
+            builder: (args) => const FormInstansiPage(),
+          );
+        }
+
+      case PagePath.pilihLokasi:
+        {
+          return _buildRouter(
+            settings: settings,
+            builder: (args) => const PilihLokasiPage(),
+          );
+        }
+
+      case PagePath.generateQR:
+        {
+          return _buildRouter(
+            settings: settings,
+            builder: (args) => const GenerateQRPage(),
           );
         }
 

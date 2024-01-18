@@ -141,7 +141,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Text(
                           'Log out',
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Config().greenColor,
                             fontSize: Config().smallToMediumTextSize,
                           ),
                         ),

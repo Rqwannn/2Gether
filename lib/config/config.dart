@@ -40,6 +40,7 @@ class Config {
   final String unggahPageImg = 'assets/core/unggah.png';
 
   final String loginLogo = 'assets/other/login_logo.png';
+  final String hostRectangle = 'assets/other/host_rectangle.png';
   final String loginComponent = 'assets/other/login_component.png';
   final String loginRec1 = 'assets/other/login_rectangle_1.png';
   final String loginRec2 = 'assets/other/login_rectangle_2.png';
@@ -64,6 +65,7 @@ class Config {
   final String intro2 = 'assets/core/splash_2.png';
   final String intro3 = 'assets/core/splash_3.png';
   final String role = 'assets/core/role_1.png';
+  final String pilihLokasiImg = 'assets/core/pilih_lokasi.png';
 
   // Size
 
