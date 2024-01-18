@@ -16,7 +16,7 @@ class _LoadMapsPageState extends State<LoadMapsPage> {
 
   LatLng? userLocation;
 
-  Future<bool> _requestLocationPermission() async {
+  Future<bool> requestLocationPermission() async {
     final status = await Permission.locationWhenInUse.request();
 
     if (status == PermissionStatus.granted) {
@@ -26,8 +26,8 @@ class _LoadMapsPageState extends State<LoadMapsPage> {
     }
   }
 
-  Future<Position?> _getLocation() async {
-    if (await _requestLocationPermission()) {
+  Future<Position?> getLocation() async {
+    if (await requestLocationPermission()) {
       try {
         Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high,
@@ -46,7 +46,7 @@ class _LoadMapsPageState extends State<LoadMapsPage> {
   void initState() {
     super.initState();
 
-    _getLocation().then((position) {
+    getLocation().then((position) {
       setState(() {
         if (position != null) {
 

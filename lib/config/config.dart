@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Config {
   final String appName = '2Gether';
@@ -7,10 +8,12 @@ class Config {
 
   final Color whiteColor = const Color(0xFFFFFFFF);
   final Color grayColor = const Color(0xFF787878);
+  final Color semiGrayColor = const Color(0xFFD9D9D9);
   final Color lightGrayColor = Color(0xFFE8F2EF);
   final Color greenColor = const Color(0xFF1D5B56);
   final Color semiGreenColor = const Color(0xFF0C8C79);
   final Color youngGreenColor = const Color(0xFF65C074);
+  final Color GreenDarkColor = const Color(0xFFBCE7C6);
   final Color blueOceanColor = const Color(0xFFE9F9EE);
   final Color orangeColor = const Color(0xFFf88753);
 
@@ -26,6 +29,7 @@ class Config {
   final Color startGradientColorIcon = const Color(0xFF1D5B56);
   final Color endGradientColorIcon = const Color(0xFF7EDCBE);
 
+  final Color leaderboardActiveColor = const Color(0xFFD2F2E4);
   final Color gold = const Color(0xFFFFAA04);
   final Color silver = const Color(0xFF9E9E9E);
   final Color bronze = const Color(0xFFFF6E04);
@@ -38,6 +42,7 @@ class Config {
   final String unggahPageImg = 'assets/core/unggah.png';
 
   final String loginLogo = 'assets/other/login_logo.png';
+  final String hostRectangle = 'assets/other/host_rectangle.png';
   final String loginComponent = 'assets/other/login_component.png';
   final String loginRec1 = 'assets/other/login_rectangle_1.png';
   final String loginRec2 = 'assets/other/login_rectangle_2.png';
@@ -46,6 +51,10 @@ class Config {
   final String testingProduk = 'assets/other/testing_produk.png';
 
   final String scanRec1 = 'assets/other/scan_rec_1.png';
+  final String coupon1 = 'assets/other/coupon_1.png';
+  final String coupon2 = 'assets/other/coupon_2.png';
+  final String coupon3 = 'assets/other/coupon_3.png';
+  final String detailCoupon = 'assets/other/coupon.png';
 
   final String defaultUser = 'assets/resource/default_user.png';
   final String googleIcon = 'assets/resource/google_icon.png';
@@ -62,6 +71,8 @@ class Config {
   final String intro2 = 'assets/core/splash_2.png';
   final String intro3 = 'assets/core/splash_3.png';
   final String role = 'assets/core/role_1.png';
+  final String pilihLokasiImg = 'assets/core/pilih_lokasi.png';
+  final String qrCodeIcon = 'assets/core/qr_code.png';
 
   // Size
 
@@ -77,6 +88,10 @@ class Config {
   // Google Maps API
 
   static const String googleMapsKey = "AIzaSyC6WZ2ezYNvaAs48CV1auf-Mc2QzQdeZRQ";
+
+  static String getDirection(LatLng userLocation, LatLng placeLocation) {
+    return 'https://maps.googleapis.com/maps/api/directions/json?origin=${userLocation.latitude},${userLocation.longitude}&destination=${placeLocation.latitude},${placeLocation.longitude}&key=$googleMapsKey';
+  }
 
   static String getNearbyPlacesUrl(double latitude, double longitude, int radius) {
     return 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$latitude,$longitude&radius=$radius&type=tourist_attraction&key=$googleMapsKey';

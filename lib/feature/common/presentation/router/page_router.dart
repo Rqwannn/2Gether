@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:twogether/config/config.dart';
 import 'package:twogether/feature/detail/presentation/page/unggah_page.dart';
+import 'package:twogether/feature/detail/presentation/page/upload.dart';
 import 'package:twogether/feature/feature.dart';
 import 'package:twogether/feature/gmaps/presentation/page/load_maps.dart';
 import 'package:twogether/feature/gmaps/presentation/page/maps.dart';
 import 'package:twogether/feature/home/presentation/screens/leaderboard.dart';
+import 'package:twogether/feature/host/presentation/page/host_page.dart';
+import 'package:twogether/feature/host/presentation/screen/form_instansi.dart';
+import 'package:twogether/feature/host/presentation/screen/generate_qr_page.dart';
+import 'package:twogether/feature/host/presentation/screen/pilih_lokasi.dart';
+import 'package:twogether/feature/redeem/presentation/screen/detail_redeem.dart';
+import 'package:twogether/feature/redeem/presentation/page/redem_point.dart';
 import 'package:twogether/feature/role/presentation/page/role.dart';
 import 'package:twogether/feature/splash_info/presentation/presentation.dart';
 import 'package:twogether/feature/qrscan/presentation/page/get_point.dart';
@@ -16,6 +23,7 @@ class PageRouter {
     RouteSettings settings,
   ) {
     switch (settings.name) {
+
       //* Splash
       case PagePath.splash:
         {
@@ -36,6 +44,64 @@ class PageRouter {
           return _buildRouter(
             settings: settings,
             builder: (args) => const SplashInfoPage(),
+          );
+        }
+
+      //* Host
+      case PagePath.host:
+        {
+          return _buildRouter(
+            settings: settings,
+            builder: (args) => const HostPage(),
+          );
+        }
+
+      case PagePath.formInstansi:
+        {
+          return _buildRouter(
+            settings: settings,
+            builder: (args) => const FormInstansiPage(),
+          );
+        }
+
+      case PagePath.pilihLokasi:
+        {
+          return _buildRouter(
+            settings: settings,
+            builder: (args) => const PilihLokasiPage(),
+          );
+        }
+
+      case PagePath.generateQR:
+        {
+          final args = settings.arguments as Map<String, dynamic>?;
+
+          final position = args!['position'] as LatLng;
+          final address = args['address'] as String;
+          
+          return _buildRouter(
+            settings: settings,
+            builder: (args) => GenerateQRPage(
+              position: position,
+              address: address,
+            ),
+          );
+        }
+
+      //* Redeem Point
+      case PagePath.redeem:
+        {
+          return _buildRouter(
+            settings: settings,
+            builder: (args) => const RedemPage(),
+          );
+        }
+      
+      case PagePath.detailRedeem:
+        {
+          return _buildRouter(
+            settings: settings,
+            builder: (args) => const DetailRedeem(),
           );
         }
 
@@ -118,6 +184,14 @@ class PageRouter {
           return _buildRouter(
             settings: settings,
             builder: (args) => const UnggahPage(),
+          );
+        }
+
+      case PagePath.upload:
+        {
+          return _buildRouter(
+            settings: settings,
+            builder: (args) => const UploadPage(),
           );
         }
 

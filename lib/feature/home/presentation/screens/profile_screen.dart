@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:twogether/config/config.dart';
 import 'package:twogether/feature/feature.dart';
+import 'package:twogether/locator.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -11,6 +13,38 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
+  int poin = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    getPoinByUserId(sl<UserCubit>().state.userEntity!.id);
+  }
+  
+  Future<int?> getPoinByUserId(String userId) async {
+    try {
+      QuerySnapshot userSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('id', isEqualTo: userId)
+          .get();
+
+      print(userSnapshot.docs.first.get('poin'));
+
+      if (userSnapshot.docs.isNotEmpty) {
+        setState(() {
+          poin = userSnapshot.docs.first.get('poin') as int;
+        });
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('Error retrieving poin: $e');
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -62,6 +96,96 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: Config().greenColor,
                               ),
                             ),
+
+                            SizedBox(height: Config().distancePerValue),
+
+                            Container(
+                              padding: EdgeInsets.all(Config().distancePerValue),
+                              decoration: BoxDecoration(
+                                color:  Config().GreenDarkColor,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey[300]!,
+                                    blurRadius: 10,
+                                    spreadRadius: 2,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  
+                                  Text(
+                                    "Point Kamu",
+                                    style: TextStyle(
+                                      fontSize: Config().smallTextSize,
+                                      color: Colors.black
+                                    ),
+                                  ),
+                                  
+                                  Text(
+                                    poin.toString(),
+                                    style: TextStyle(
+                                      fontSize: Config().smallTextSize,
+                                      color: Colors.black
+                                    ),
+                                  ),
+
+
+                                ],
+                              ),
+                            ),
+
+                            SizedBox(height: Config().distancePerValue),
+
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: Config().distancePerValue + 30),
+                              child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Config().startGradientColorCard,
+                                    Config().endGradientColorCard
+                                  ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, PagePath.redeem);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.transparent,
+                                    disabledForegroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent,
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ).copyWith(
+                                    fixedSize: MaterialStateProperty.all(
+                                      const Size.fromHeight(50),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'Redeem Point',
+                                      style: TextStyle(
+                                        color: Config().greenColor,
+                                        fontSize: Config().smallToMediumTextSize,
+                                      ),
+                                    ),
+                                  )
+                                ),
+                              ),
+                            ),
+
                           ],
                         ),
                       )),
@@ -141,7 +265,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Text(
                           'Log out',
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Config().greenColor,
                             fontSize: Config().smallToMediumTextSize,
                           ),
                         ),

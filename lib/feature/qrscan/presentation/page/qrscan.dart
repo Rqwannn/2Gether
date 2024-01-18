@@ -1,7 +1,11 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:twogether/config/config.dart';
 import 'package:twogether/feature/common/common.dart';
+import 'package:twogether/locator.dart';
+import 'package:twogether/service/notification_controller.dart';
 
 class QrScanPage extends StatefulWidget {
   const QrScanPage({super.key});
@@ -30,14 +34,40 @@ class _QrScanPageState extends State<QrScanPage> {
 
   }
 
-  @override
-  void initState() {
-    super.initState();
+  Future<void> tambahPoin(String userId) async {
+    try {
+      DocumentReference userRef = FirebaseFirestore.instance.collection('users').doc(userId);
+      DocumentSnapshot userSnapshot = await userRef.get();
 
-    Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushNamed(context, PagePath.getPoint);
-    });
-    
+      // Mengambil nilai poin saat ini
+      int poinSaatIni = userSnapshot['poin'] ?? 0;
+      String username = userSnapshot['username'];
+
+      int poinBaru = poinSaatIni + 10;
+
+      await userRef.update({'poin': poinBaru});
+
+      AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: 10,
+          channelKey: 'basic_channel',
+          actionType: ActionType.Default,
+          title: 'Scan QR Berhasil!',
+          body: 'Berhasil menambahkan 10 poin ke pengguna dengan Username: $username',
+        ),
+      );
+
+    } catch (e) {
+      AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: 10,
+          channelKey: 'basic_channel',
+          actionType: ActionType.Default,
+          title: 'Scan QR Gagal!',
+          body: 'Terdapat Kesalah Pada Sistem Mohon Untuk Menghubungi Customer Service',
+        ),
+      );
+    }
   }
 
   void onQRViewCreated(QRViewController controller) {
@@ -49,6 +79,25 @@ class _QrScanPageState extends State<QrScanPage> {
 
       if(qrCodeData != null){
         controller!.pauseCamera();
+        
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const AlertDialog(
+              title: Text("Loading"),
+              content: Text("Loading"),
+            );
+          },
+        );
+
+        tambahPoin(sl<UserCubit>().state.userEntity!.id);
+
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          PagePath.getPoint,
+          (Route<dynamic> route) => false,
+        );
+
         print("Hasil scan: $qrCodeData");
       }
 

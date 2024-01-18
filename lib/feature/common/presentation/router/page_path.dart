@@ -2,16 +2,22 @@ class PagePath {
   static const splash = '/';
   static const splashInfo = '/splash_info';
 
+  //* Host
+  static const host = '/host';
+  static const formInstansi = '/form_instansi';
+  static const pilihLokasi = '/plih_lokasi';
+  static const generateQR = '/generate_qr';
+  
   //* Home
   static const home = '/home';
   
-  //* Home
+  //* Role
   static const role = '/role';
 
   //* Scan
   static const scan = '/scan';
   
-  //* Scan
+  //* Leaderboard
   static const leaderboard = '/leaderboard';
   
   //* Maps
@@ -25,6 +31,11 @@ class PagePath {
   //* Detail
   static const detail = '/detail';
   static const unggah = '/unggah';
+  static const upload = '/upload';
+
+  //* Redeem Point
+  static const redeem = '/redem';
+  static const detailRedeem = '/detail_redem';
 
   //* Auth
   static const login = '/login';
